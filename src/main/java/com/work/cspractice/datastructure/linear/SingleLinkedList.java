@@ -1,11 +1,18 @@
 package com.work.cspractice.datastructure.linear;
 
+import java.util.Arrays;
+import java.util.Objects;
+
 /* LinkedList vs ArrayList
  * 가장 큰 차이는 '노드(Node)'라는 저장소를 이용하여 연결한다는 점이다.
  * 노드라는 것은 그냥 객체이고 이 객체는 자료를 저장할 'Data' 필드와 다음 연결 요소의 주소를 저장하는 'Next' 필드를 가지고 있을 뿐이다.
  * ArrayList는 오브젝트 배열(Object[])을 사용해 데이터를 담아두고, LinkedList는 여러 노드 객체들을 체인(Chain)처럼 연결한다.
  * */
 public class SingleLinkedList<E> {
+    private Node<E> head; // 노드의 첫 부분을 가리키는 포인터
+    private Node<E> tail; // 노드의 마지막 부분을 가리키는 포인터
+    private int size; // 요소 갯수
+
     /* Node 클래스를 SingleLinkedList 클래스 밖에 선언해도 문제 없다.
      * 하지만, Node 클래스는 오로지 SingleLinkedList 클래스에서만 이용되며 다른 클래스에서는 전혀 이용하지 않는다.
      * 내부 클래스를 static 선언한 이유는 메모리 누수(memory leak)를 막기 위해서이다.
@@ -19,10 +26,6 @@ public class SingleLinkedList<E> {
             this.next = next;
         }
     }
-
-    private Node<E> head; // 노드의 첫 부분을 가리키는 포인터
-    private Node<E> tail; // 노드의 마지막 부분을 가리키는 포인터
-    private int size; // 요소 갯수
 
     public SingleLinkedList() {
         this.head = null;
@@ -81,6 +84,11 @@ public class SingleLinkedList<E> {
             // 6. 최초 추가 아닐 때 last 변수(추가 되기 전 마지막 요소)에서 추가된 새 노드 가리키도록 업데이트
             last.next = newNode;
         }
+    }
+
+    public boolean add(E value) {
+        addLast(value);
+        return true;
     }
 
     // 중간 요소 추가
@@ -184,5 +192,109 @@ public class SingleLinkedList<E> {
         return returnValue;
     }
 
+    // 값으로 remove 메서드 구현
+    public boolean remove(Object value) {
+        // 1. 만약 삭제할 요소가 아무것도 없으면 에러 발생
+        if (head == null) {
+            throw new RuntimeException();
+        }
 
+        // 2. 이전 노드, 삭제 노드, 다음 노드를 저장할 변수 선언
+        Node<E> prev_node = null;
+        Node<E> del_node = null;
+        Node<E> next_node = null;
+
+        // 3. 루프 변수 선언
+        Node<E> i = head;
+
+        // 4. 노드의 next를 순회하면서 해당 값을 찾는다
+        while (i != null) {
+            if (Objects.equals(i.item, value)) {
+                // 노드의 값과 매개변수 값이 같으면 삭제 노드에 요소를 대입하고 종료
+                del_node = i;
+                break;
+            }
+
+            // 싱글 연결 리스트에는 prev 정보가 없기 때문에 이전 노드에도 요소를 일일히 대입해야 함
+            prev_node = i;
+            i = i.next;
+        }
+
+        // 5. 만일 찾은 요소가 없다면 리턴
+        if (del_node == null) {
+            return false;
+        }
+
+        // 6. 만약 삭제하려는 노드가 head라면 첫번째 요소를 삭제하는 것이니 removeFirst() 사용
+        if (del_node == head) {
+            removeFirst();
+            return true;
+        }
+
+        // 7. 다음 노드에 삭제 노드 next의 요소 대입
+        next_node = del_node.next;
+
+        // 8. 삭제 요소 데이터 모두 제거
+        del_node.next = null;
+        del_node.item = null;
+
+        // 9. 요소가 삭제 되었으니 크기 감소
+        size--;
+
+        // 10. 이전 노드가 다음 노드를 참조하도록 업데이트
+        prev_node.next = next_node;
+
+        return true;
+    }
+
+    // addLast() 와 같이 tail을 이용해 상수 시간안으로 처리되도록 구현할 법 하지만,
+    // 싱글 연결 리스트는 노드 prev 개념이 없어 삭제될 노드의 이전 요소를 참조할 방법이 없다
+    // 결국, 처음부터 끝가지 순회한다
+    public E removeLast() {
+        return remove(size - 1);
+    }
+
+    // search 메서드로 노드를 검색해 값을 반환
+    public E get(int index) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        return search(index).item;
+    }
+
+    public void set(int index, E value) {
+        if (index < 0 || index >= size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        // 1. search 메서드를 이용해 교체할 노드를 얻는다
+        Node<E> replace_node = search(index);
+
+        // 2. 교체할 노드의 요소를 변경한다
+        //replace_node.item = null;
+        replace_node.item = value;
+    }
+
+    @Override
+    public String toString() {
+        // 1. 만일 head가 null 일 경우 빈 배열 반환
+        if (head == null) {
+            return "[]";
+        }
+
+        // 2. 현재 크기 만큼 배열 생성
+        Object[] array = new Object[size];
+
+        // 3. 노드 next를 순회하면서 배열에 노드값을 저장
+        int index = 0;
+        Node<E> n = head;
+        while (n != null) {
+            array[index] = n.item;
+            index++;
+            n = n.next;
+        }
+
+        return Arrays.toString(array);
+    }
 }
