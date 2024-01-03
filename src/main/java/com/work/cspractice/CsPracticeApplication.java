@@ -6,6 +6,7 @@ import com.work.cspractice.datastructure.linear.QueueDS;
 import com.work.cspractice.datastructure.linear.SingleLinkedList;
 import com.work.cspractice.datastructure.linear.StackDS;
 import com.work.cspractice.datastructure.linear.StaticArray;
+import com.work.cspractice.java.nio.JavaNIO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -15,7 +16,8 @@ public class CsPracticeApplication {
     public static void main(String[] args) {
         SpringApplication.run(CsPracticeApplication.class, args);
 
-        runQueueDS();
+        JavaNIO nio = new JavaNIO();
+        nio.createFileAndRead();
     }
 
     private static void runSingleLinkedList() {
