@@ -1,4 +1,4 @@
-## Design Pattern
+## 디자인 패턴(Design Pattern) 기술 면접 준비
 
 ### 라이브리리(Library)
 
