@@ -1,4 +1,4 @@
-## Object-Oriented Programming(OOP)
+## Object-Oriented Programming(OOP) 기술 면접 준비
 
 ### 좋은 코드란 무엇인가요?
 
