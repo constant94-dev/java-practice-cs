@@ -105,7 +105,7 @@ Servlet Container는 설정 파일(web.xml)을 읽고, 서블릿 클래스를 �
 
 모델1은 사용자 요청과 응답을 전부 `JSP`가 처리하는 모델이구요. 모델2는 컨트롤러에서 사용자 요청을 받아 비즈니스 로직을 태우고 데이터를 `JSP`로 넘겨 응답하는 모델입니다.
 
-![]()
+![](../../../images/MVCModel.png)
 
 ---
 ### Spring MVC를 위한 필수 설정은 어떤게 있나요?
@@ -121,7 +121,7 @@ JDBC 설정을 위한 Bean 설정과 트랜잭션 설정 등 다양한 설정이
 
 Spring MVC의 시작은 프론트 컨트롤러인 `DispatcherServlet`입니다. `DispatcherServlet`은 사용자 HTTP 요청을 처리하기 위해 등록된 핸들러로 디스패치시켜 맵핑 및 예외 처리 기능을 제공합니다.
 
-![]()
+![](../../../images/MVCArch.png)
 
 1. `DispatcherServlet`으로 HTTP Request가 들어온다
 2. `DispatcherServlet`은 요청 URL 등의 정보와 맵핑되는 적절한 Controller를 선택하는 작업을 HandlerMapping에 디스패치한다.
@@ -160,14 +160,14 @@ Spring MVC의 시작은 프론트 컨트롤러인 `DispatcherServlet`입니다. 
 필터와 시큐리티 필터 모두 `Servlet`에 요청이 맵핑되기 전에 실행되는 필터입니다. 둘 다 동일한 필터이지만 일반 필터는 서블릿 컨테이너에 직접 등록해서 사용하는 필터이고,
 시큐리티 필터는 `DelegatingFilterProxy`가 서블릿 컨테이너에 필터로 등록되어서 필터 작업을 `Security FilterChain`으로 위임해 실행되는 필터를 의미합니다.
 
-![]()
+![](../../../images/SecurityFilterChain.png)
 
 ---
 ### Filter와 Interceptor의 차이는 무엇인가요?
 
 필터는 `Spring Context` 외부에 존재하여 서블릿에 요청이 맵핑되기 전에 작업을 수행하구요, `Interceptor`는 `Spring Context`내부에 존재해 `DispatcherServlet`이 컨트롤러를 호출하기 전과 후에 작업을 수행합니다.
 
-![]()
+![](../../../images/SpringMVCLifecycle.png)
 
 ---
 ### 인증을 위해서 어떻게 Spring Security를 사용하셨나요?
@@ -176,12 +176,12 @@ JWT를 생성, 인증, 권한 부여, 유효성 검사, PK 추출을 할 수 있
 이를 사용해서 Filter 작업을 수행할 `JwtAuthenticationFilter`를 만들었습니다.
 JWT 인증 필터가 기본 인증 필터인 `UsernamePasswordAuthenticationFilter` 이전에 수행할 수 있도록 Security Filter Chain 설정을 통해서 인증을 구현할 수 있었습니다.
 
-![]()
+![](../../../images/SpringSecurityContextholder.png)
 
 ---
 ### Spring Security의 전체적인 인증 프로세스를 설명해 주실 수 있나요?
 
-![]()
+![](../../../images/SpringSecurityProcess.png)
 
 1. 클라이언트가 요청을 보내면, `Servlet Filter`에 의해서 `Security Filter`로 작업이 위임되고 여러 Security Filter 중 `JwtAuthenticationFilter`에서 인증을 처리한다.
 2. `JwtAuthenticationFilter`는 서블릿 요청 객체에서 토큰을 가져와서 `JwtTokenProvider`가 해당 토큰을 검증해 토큰이 유효한지 검사한다.
