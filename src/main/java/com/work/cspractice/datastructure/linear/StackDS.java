@@ -1,11 +1,12 @@
 package com.work.cspractice.datastructure.linear;
 
 import java.util.ArrayDeque;
+import java.util.Deque;
 
 public class StackDS {
 
     public void runStack() {
-        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        Deque<Integer> deque = new ArrayDeque<>();
 
         for (int i = 0; i < 10; i++) {
             deque.push(i);
