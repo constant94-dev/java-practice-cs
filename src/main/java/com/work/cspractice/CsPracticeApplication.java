@@ -1,11 +1,6 @@
 package com.work.cspractice;
 
-import com.work.cspractice.datastructure.linear.DualLinkedList;
-import com.work.cspractice.datastructure.linear.DynamicArray;
-import com.work.cspractice.datastructure.linear.QueueDS;
-import com.work.cspractice.datastructure.linear.SingleLinkedList;
-import com.work.cspractice.datastructure.linear.StackDS;
-import com.work.cspractice.datastructure.linear.StaticArray;
+import com.work.cspractice.datastructure.linear.*;
 import com.work.cspractice.java.nio.JavaNIO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -21,7 +16,7 @@ public class CsPracticeApplication {
     }
 
     private static void runSingleLinkedList() {
-        SingleLinkedList<Number> l = new SingleLinkedList<>();
+        SinglyLinkedListDesc<Number> l = new SinglyLinkedListDesc<>();
 
         l.add(3);
         l.add(6);

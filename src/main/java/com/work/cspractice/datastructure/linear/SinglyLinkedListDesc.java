@@ -8,7 +8,7 @@ import java.util.Objects;
  * 노드라는 것은 그냥 객체이고 이 객체는 자료를 저장할 'Data' 필드와 다음 연결 요소의 주소를 저장하는 'Next' 필드를 가지고 있을 뿐이다.
  * ArrayList는 오브젝트 배열(Object[])을 사용해 데이터를 담아두고, LinkedList는 여러 노드 객체들을 체인(Chain)처럼 연결한다.
  * */
-public class SingleLinkedList<E> {
+public class SinglyLinkedListDesc<E> {
     private Node<E> head; // 노드의 첫 부분을 가리키는 포인터
     private Node<E> tail; // 노드의 마지막 부분을 가리키는 포인터
     private int size; // 요소 갯수
@@ -27,7 +27,7 @@ public class SingleLinkedList<E> {
         }
     }
 
-    public SingleLinkedList() {
+    public SinglyLinkedListDesc() {
         this.head = null;
         this.tail = null;
         this.size = 0; // 리스트에 있는 요소 개수 (연결된 노드의 개수)
