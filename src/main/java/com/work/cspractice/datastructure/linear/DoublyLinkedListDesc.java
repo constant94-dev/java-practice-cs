@@ -8,12 +8,12 @@ import java.util.Objects;
  * 양방향 연결 리스트는 이전(prev) 포인터를 가지고 있기 때문에 한번에 마지막 요소를 탐색할 수 있다.
  * java.util.LinkedList 에서 제공하는 형태는 DualLinkedList 이다.
  * */
-public class DualLinkedList<E> {
+public class DoublyLinkedListDesc<E> {
     private Node<E> head; // 노드의 첫 부분을 가리키는 레퍼런스
     private Node<E> tail; // 노드의 끝 부분을 가리키는 레퍼런스
     private int size; // 리스트 요소 갯수
 
-    public DualLinkedList() {
+    public DoublyLinkedListDesc() {
         this.head = null;
         this.tail = null;
         this.size = 0;

@@ -1,4 +1,4 @@
-package com.work.cspractice.datastructure.linear.list;
+package com.work.cspractice.datastructure.linear.collection.list;
 
 import java.util.Arrays;
 import java.util.NoSuchElementException;
