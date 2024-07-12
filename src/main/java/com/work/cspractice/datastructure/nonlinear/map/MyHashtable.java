@@ -23,7 +23,7 @@ public class MyHashtable {
         }
     }
 
-    LinkedList<Node>[] data;
+    private LinkedList<Node>[] data;
 
     public MyHashtable(int size) {
         this.data = new LinkedList[size];
