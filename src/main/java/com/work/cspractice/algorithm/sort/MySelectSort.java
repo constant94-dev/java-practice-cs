@@ -3,6 +3,8 @@ package com.work.cspractice.algorithm.sort;
 import java.util.Arrays;
 
 public class MySelectSort {
+    byte age;
+    byte order;
     public void solution(int[] nums) {
         int arrLength = nums.length;
         for (int i = 0; i < arrLength; i++) {
@@ -11,6 +13,8 @@ public class MySelectSort {
             nums[i] = nums[minIndex];
             nums[minIndex] = temp;
         }
+        int a = this.age << 8;
+
         System.out.println(Arrays.toString(nums));
     }
 

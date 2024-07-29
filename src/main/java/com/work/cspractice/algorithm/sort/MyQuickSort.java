@@ -27,7 +27,7 @@ public class MyQuickSort {
             }
         }
 
-        int pivotPos = i + 1;
+        int pivotPos = i + 1; // 초기 기준값과 최종 좌측 값 교체 (위 반복문을 통해 기준값 좌측은 작은 값 모임)
         mySwap(nums, pivotPos, right);
 
         System.out.println("현재 "+pivotPos+"번째: "+Arrays.toString(nums));
